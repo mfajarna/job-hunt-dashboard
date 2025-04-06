@@ -22,9 +22,9 @@ export default function baseService({
   timeout,
 }: BaseServiceType) {
   // Enable when using development env
-  // const url: string = process.env.NEXT_PUBLIC_BASE_URL + path;
+  const url: string = process.env.NEXT_PUBLIC_BASE_URL + path;
 
-  const url: string = path;
+  // const url: string = path;
 
   return instance
     .request({
