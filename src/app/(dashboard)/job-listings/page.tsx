@@ -1,4 +1,3 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import CButtonActionTable from '@/components/organism/CButtonActionTable/CButtonActionTable';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -11,6 +10,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { JOB_LISTING_COLUMNS } from '@/constants';
+import { authOptions } from '@/lib/auth-config';
 import { dateFormat } from '@/lib/utils';
 import moment from 'moment';
 import { getServerSession } from 'next-auth';
@@ -22,9 +22,11 @@ type JobListingsProps = {};
 async function getDataJobs() {
   const session = await getServerSession(authOptions);
 
+  const companyId = (session?.user as any)?.id;
+
   const jobs = prisma.job.findMany({
     where: {
-      companyId: session?.user.id,
+      companyId,
     },
   });
 

@@ -19,7 +19,7 @@ type CInputSkillProps = {
 const CInputSkill: FC<CInputSkillProps> = ({ form, name, label }) => {
   const [isHide, setIsHide] = React.useState<boolean>(false);
   const [values, setValues] = React.useState<string[]>([]);
-  const inputRef = React.useRef<HTMLInputElement>();
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   const handleSaveValue = () => {
     const value = inputRef.current?.value;

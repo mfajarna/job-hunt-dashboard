@@ -32,10 +32,17 @@ const SignUpPage = () => {
 
   const mutationSignUp = useMutation({
     mutationFn: actionSignUp,
-    onSuccess: () => {
-      navigate('/auth/signin');
+    onSuccess: async () => {
+      await toast({
+        title: 'Success',
+        description: 'Create account success.',
+      });
+
+      await navigate('/auth/signin');
     },
-    onError: () => {
+    onError: (e) => {
+      console.log('mutation sign up', e.message);
+
       toast({
         title: 'Error',
         description: 'Email has been taken.',
@@ -44,10 +51,12 @@ const SignUpPage = () => {
   });
 
   const onSubmit = async (val: TFormData) => {
-    mutationSignUp.mutate(val);
+    await mutationSignUp.mutate(val);
 
-    form.reset();
+    await form.reset();
   };
+
+  const isLoading = mutationSignUp.isPending && !mutationSignUp.isSuccess;
 
   return (
     <div className="relative w-full h-screen">
@@ -123,7 +132,9 @@ const SignUpPage = () => {
                 )}
               />
 
-              <Button className="w-full">Sign In</Button>
+              <Button className="w-full" disabled={isLoading}>
+                Sign In
+              </Button>
 
               <div className="text-sm">
                 Already have an account? {''}

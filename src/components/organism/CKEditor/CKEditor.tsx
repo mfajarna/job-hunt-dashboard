@@ -8,7 +8,7 @@ type CKEditorProps = {
 };
 
 const CKEditor: FC<CKEditorProps> = ({ form, name, editorLoaded }) => {
-  const editorRef = React.useRef<any>();
+  const editorRef = React.useRef<any>(null);
   const { CKEditor, ClassicEditor } = editorRef.current || {};
 
   React.useEffect(() => {

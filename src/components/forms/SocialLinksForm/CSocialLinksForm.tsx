@@ -68,7 +68,7 @@ const CSocialLinksForm: React.FC<CSocialLinksFormProps> = ({ detail }) => {
   const onSubmit = (val: TFormData) => {
     const body = {
       ...val,
-      companyId: session?.user.id,
+      companyId: (session?.user as any)?.id,
     };
 
     mutatiion.mutate(body);

@@ -11,7 +11,7 @@ type JobDetailType = {
 } & Job;
 
 type JobDetailProps = {
-  detail: JobDetailType | null;
+  detail: any;
 };
 
 const CJobDetailTabs: FC<JobDetailProps> = ({ detail }) => {

@@ -1,6 +1,6 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { authOptions } from '@/lib/auth-config';
 import { dateFormat, parseCompany } from '@/lib/utils';
 import {
   FacebookIcon,
@@ -33,7 +33,7 @@ async function getDetailCompany() {
 
   const data = await prisma.company.findFirst({
     where: {
-      id: serverSession?.user.id,
+      id: (serverSession?.user as any)?.id,
     },
     include: {
       CompanyOverview: true,

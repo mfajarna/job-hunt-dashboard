@@ -15,12 +15,14 @@ import { signInFormSchema } from '@/lib/form-schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 type TFormData = z.infer<typeof signInFormSchema>;
 
 const SignInPage = () => {
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const { toast } = useToast();
   const { navigate } = useRouterNavigation();
 
@@ -29,17 +31,22 @@ const SignInPage = () => {
   });
 
   const onSubmit = async (form: TFormData) => {
+    setIsLoading(true);
+
     const auth = await signIn('credentials', {
       ...form,
       redirect: false,
     });
 
     if (auth?.status === 401) {
-      toast({
+      setIsLoading(false);
+
+      await toast({
         title: 'Error',
         description: 'Email or password maybe wrong',
       });
     } else {
+      setIsLoading(false);
       await navigate('/');
     }
   };
@@ -90,7 +97,9 @@ const SignInPage = () => {
                 )}
               />
 
-              <Button className="w-full">Sign Up</Button>
+              <Button className="w-full" disabled={isLoading}>
+                Sign Up
+              </Button>
 
               <div className="text-sm">
                 Don{'`'}t have and account? {''}

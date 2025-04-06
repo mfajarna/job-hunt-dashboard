@@ -1,4 +1,3 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import CButtonActionTable from '@/components/organism/CButtonActionTable/CButtonActionTable';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -11,6 +10,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { JOB_LISTING_ALL_ALPLICANTS } from '@/constants';
+import { authOptions } from '@/lib/auth-config';
 import { getServerSession } from 'next-auth';
 import prisma from '../../../../lib/prisma';
 
@@ -18,7 +18,7 @@ type AllAplicantsProps = {};
 
 async function getDataApplicants() {
   const session = await getServerSession(authOptions);
-  const companyId = session?.user.id;
+  const companyId = (session?.user as any)?.id;
 
   const applicants = await prisma.applicant.findMany({
     include: {

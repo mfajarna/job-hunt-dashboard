@@ -1,11 +1,11 @@
 import CCardDashboard from '@/components/organism/CCardDashboard';
+import { authOptions } from '@/lib/auth-config';
 import { getServerSession } from 'next-auth';
 import prisma from '../../../lib/prisma';
-import { authOptions } from '../api/auth/[...nextauth]/route';
 
 const getDataStatistic = async () => {
   const session = await getServerSession(authOptions);
-  const companyId = session?.user.id;
+  const companyId = (session?.user as any)?.id;
 
   const applicant = await prisma.applicant.count({
     where: {

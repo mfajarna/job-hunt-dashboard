@@ -68,7 +68,7 @@ const CDialogAddTeam = () => {
   const onSubmit = (val: TFormData) => {
     const body = {
       ...val,
-      companyId: session?.user.id,
+      companyId: (session?.user as any)?.id,
     };
 
     mutation.mutate(body);

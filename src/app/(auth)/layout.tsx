@@ -1,10 +1,10 @@
 import { Toaster } from '@/components/ui/toaster';
+import { authOptions } from '@/lib/auth-config';
 import QueryProvider from '@/lib/query-provider';
 import { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import { Poppins } from 'next/font/google';
 import { redirect } from 'next/navigation';
-import { authOptions } from '../api/auth/[...nextauth]/route';
 import '../globals.css';
 
 const poppins = Poppins({

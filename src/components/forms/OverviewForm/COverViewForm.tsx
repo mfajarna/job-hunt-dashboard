@@ -119,7 +119,7 @@ const COverViewForm: FC<OverviewFormProps> = ({ detail }) => {
       const body = {
         ...val,
         image: fileName,
-        companyId: session?.user.id,
+        companyId: (session?.user as any).id,
       };
 
       mutationOverview.mutate(body);
@@ -158,7 +158,8 @@ const COverViewForm: FC<OverviewFormProps> = ({ detail }) => {
               <CCustomUpload form={form} name="image" />
 
               <div className="text-sm text-red-500">
-                {form.formState.errors.image?.message}
+                {/* {form?.formState?.errors.image?.message} */}
+                {form.formState.errors.image?.message as string}
               </div>
             </div>
           </CFieldInput>

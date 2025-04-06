@@ -98,7 +98,7 @@ const PostJobPage: FC<PostJobPageProps> = ({}) => {
         applicants: 0,
         benefits: val.benefits,
         categoryId: val.categoryId,
-        companyId: session?.user.id,
+        companyId: (session?.user as any)?.id,
         datePosted: moment().toDate(),
         description: val.jobDescription,
         statusJob: 'live',

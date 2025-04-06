@@ -5,19 +5,14 @@ import { getResumeFileUrl } from '@/lib/utils';
 import { ArrowLeftIcon } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { FC } from 'react';
 import prisma from '../../../../../lib/prisma';
 
 export const metadata: Metadata = {
   title: 'Dashboard | Job Detail',
 };
 
-type paramsType = {
-  id: string;
-};
-
-type JobDetailPageProps = {
-  params: paramsType;
+type JobDetailProps = {
+  params: Promise<{ id: string }>;
 };
 
 async function getDetailJob(id: string) {
@@ -38,8 +33,10 @@ async function getDetailJob(id: string) {
   return job;
 }
 
-const JobDetailPage: FC<JobDetailPageProps> = async ({ params }) => {
-  const job = await getDetailJob(params.id);
+export default async function JobDetailPage({ params }: JobDetailProps) {
+  const { id } = await params;
+
+  const job = await getDetailJob(id);
   const fileName = await getResumeFileUrl(job?.applicant);
 
   return (
@@ -74,6 +71,4 @@ const JobDetailPage: FC<JobDetailPageProps> = async ({ params }) => {
       </Tabs>
     </div>
   );
-};
-
-export default JobDetailPage;
+}

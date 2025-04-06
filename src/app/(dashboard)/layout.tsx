@@ -2,13 +2,13 @@ import CHeader from '@/components/layouts/CHeader/CHeader';
 import CSidebar from '@/components/layouts/CSidebar/CSidebar';
 import { Toaster } from '@/components/ui/toaster';
 import NextAuthProvider from '@/context/NextAuthProvider';
+import { authOptions } from '@/lib/auth-config';
 import QueryProvider from '@/lib/query-provider';
 import type { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 import { Poppins } from 'next/font/google';
 import { redirect } from 'next/navigation';
 import prisma from '../../../lib/prisma';
-import { authOptions } from '../api/auth/[...nextauth]/route';
 import '../globals.css';
 
 const poppins = Poppins({
@@ -30,7 +30,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
 
   const company = await prisma.company.findFirst({
-    where: { id: session?.user.id },
+    where: { id: (session?.user as any)?.id },
     include: {
       CompanyOverview: true,
     },
