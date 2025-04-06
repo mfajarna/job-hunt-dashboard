@@ -21,9 +21,9 @@ export default function baseService({
   signal,
   timeout,
 }: BaseServiceType) {
-  const url: string = process.env.NEXT_PUBLIC_BASE_URL + path;
+  // const url: string = process.env.NEXT_PUBLIC_BASE_URL + path;
 
-  console.log('url', url);
+  const url = path;
 
   return instance
     .request({
