@@ -21,10 +21,11 @@ export default function baseService({
   signal,
   timeout,
 }: BaseServiceType) {
-  // Enable when using development env
-  const url: string = process.env.NEXT_PUBLIC_BASE_URL + path;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const url: string = (baseUrl ?? '') + path;
+  // const url = path;
 
-  // const url: string = path;
+  console.log('url', url);
 
   return instance
     .request({
@@ -36,6 +37,8 @@ export default function baseService({
       timeout,
     })
     .then((res) => {
+      // console.log('Data Response', res);
+
       return res.data;
     });
 }
