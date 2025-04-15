@@ -9,6 +9,9 @@
     "lint": "next lint",
     "postinstall": "prisma generate"
   },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^43.3.0",
     "@ckeditor/ckeditor5-react": "^9.3.1",
