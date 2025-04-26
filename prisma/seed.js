@@ -36,7 +36,7 @@ async function main() {
         name: 'Backend Engineer',
       },
       {
-        name: 'Software Engineer',
+        name: 'Frontend Engineer',
       },
       {
         name: 'Network Engineer',
