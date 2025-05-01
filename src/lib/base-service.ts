@@ -23,7 +23,7 @@ export default function baseService({
 }: BaseServiceType) {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   // const url: string = (baseUrl ?? '') + path;
-  const url = path;
+  const url = '/api' + path;
 
   console.log('url', url);
 
